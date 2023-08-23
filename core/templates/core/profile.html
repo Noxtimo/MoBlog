@@ -1,0 +1,81 @@
+{%extends 'core/base.html'%}
+{%load crispy_forms_tags%}
+{%block content%} 
+
+<div class="row mx-auto items-centre p-20 m-20 text-centre">
+    <div class="col-md-8 ">
+        <div class="content-section bg-gray-100">
+            <div class="content-section">
+                <div class="media">
+                    <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
+                    <div class="media-body">
+                        <h2 class="account-heading">{{user.username}}</h2>
+                        <p class="text-secondary">{{user.email}}</p>
+                    </div>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Join Today</legend>
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                        {{ u_form|crispy }}
+                        {{ p_form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="py-2 px-2 text-white bg-purple-500 rounded-xl " type="submit">Update Details</button>
+                    </div>
+                </form>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+                    </small>
+                    <div class="menu-right flex items-centre space-x-4 py-4">
+                        <a href="{%url 'logout'%}">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                             </svg>
+                        </a> Logout
+                    </div>
+                    <hr>
+                    <h2 class="my-6 text-xl">My Order</h2>
+                    <div clss="w-full mb-6 p-6 flex flex-wrap bg-gray-100">
+                        <div class="mb-6 flex justify-between ">
+                            <a href="#">
+                                Order Id: 1
+                            </a>
+                        </div>
+                        <div class="mb-6 w-full">
+                            <div class="product mb-6 flex pr-6">
+                                <a href="#" class="w-1/4">
+                                    <img class="hover:shadow-lg rounded-xl" src="https://m.xcite.com/media/catalog/product//i/p/iphone_14_5g_-_white_1_1_1.jpg">
+                                </a>
+                                <div class="w-3/4 pl-6">
+                                    <div class="flex justify-between">
+                                        <a href="#" class="text-lg">Product Name</a>
+                                        <p class="mb-4 pt-1 text-gray-400">£99</p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="mt-6">
+                Quantity: 1
+            </div>
+
+        <div>
+            <p class="text-lg">Date: 04:04:2023 </p>
+            <p class="text-lg">Total: £199 </p>
+        </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
